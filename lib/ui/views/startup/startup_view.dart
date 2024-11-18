@@ -21,12 +21,16 @@ class StartupView extends StackedView<StartupViewModel> {
           children: [
             Text(
               'CAMSCANNER APP',
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900, fontFamily: 'Montserrat'),
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                  fontFamily: 'Montserrat'),
             ),
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Loading ...', style: TextStyle(fontSize: 16, fontFamily: 'Montserrat')),
+                Text('Loading ...',
+                    style: TextStyle(fontSize: 16, fontFamily: 'Montserrat')),
                 horizontalSpaceSmall,
                 SizedBox(
                   width: 16,
