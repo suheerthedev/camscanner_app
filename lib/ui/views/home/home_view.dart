@@ -31,7 +31,7 @@ class _HomeViewState extends State<HomeView> {
         _pictures = pictures;
       });
     } catch (exception) {
-      // Handle exception here
+      throw Exception(exception);
     }
   }
 
@@ -44,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
           appBar: AppBar(
             centerTitle: true,
             titleTextStyle: const TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 fontFamily: 'Montserrat'),
@@ -52,19 +52,29 @@ class _HomeViewState extends State<HomeView> {
             title: const Text("Camscanner"),
           ),
           body: SafeArea(
-              child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                for (var picture in _pictures) Image.file(File(picture)),
-              ],
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              itemCount: _pictures.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 8.0, horizontal: 16.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      File(_pictures[index]),
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              },
             ),
-          )),
+          ),
           floatingActionButton: Container(
-            width: 320,
+            width: 328,
             height: 70,
-            // margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-            decoration: const BoxDecoration(borderRadius: BorderRadius.zero),
+            margin: const EdgeInsets.only(left: 5, top: 5, bottom: 5),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   iconColor: Colors.white,
