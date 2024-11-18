@@ -23,15 +23,15 @@ class _HomeViewState extends State<HomeView> {
   Future<void> initPlatformState() async {}
 
   addPicture() async {
-    List<String> pictures;
     try {
-      pictures = await CunningDocumentScanner.getPictures() ?? [];
-      if (!mounted) return;
-      setState(() {
-        _pictures = pictures;
-      });
+      List<String>? pictures = await CunningDocumentScanner.getPictures();
+      if (pictures != null) {
+        setState(() {
+          _pictures.addAll(pictures);
+        });
+      }
     } catch (exception) {
-      throw Exception(exception);
+      print('Error adding pictures: $exception');
     }
   }
 
